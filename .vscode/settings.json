@@ -1,6 +1,3 @@
 {
-    "cSpell.words": [
-        "pyaudio",
-        "pyautogui"
-    ]
+    "python.pythonPath": ".\\env\\Scripts\\python.exe"
 }
