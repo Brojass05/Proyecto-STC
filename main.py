@@ -1,49 +1,45 @@
-import speech_recognition
 import pyttsx3
-import pyautogui
+import logging
+from modulo_voz import ModuloVoz
+from modulo_teclas import teclas
 
 class Main:
     def __init__(self):
-        print("Inicializando Main...")
-        self.engine = pyttsx3.init()
-        self.engine.setProperty('rate', 150)
-        self.engine.setProperty('volume', 1.0)
-        self.flujo_principal()
-        
-        
+        self.voz = ModuloVoz()  # Inicializar ModuloVoz correctamente
+
     def flujo_principal(self):
         try:
-            from modulo_voz import ModuloVoz
-            
-            self.hablar()
-            self.voz = ModuloVoz()
             self.text = self.voz.obtener_voz()
-            print("Dijiste: ", self.text)
+            print("Texto obtenido:", self.text)
             self.verificar_texto_voz()
-            
         except Exception as e:
-            print(f"Error const. Main: {e}")
+            print(f"Error en flujo_principal: {e}")
+            raise  # Re-raise the exception for debugging
 
-        
-    def hablar(self):
+    def hablar(self, mensaje):
         try:
-            self.engine.say("Jarvis is listening to you.")
+            self.engine = pyttsx3.init()
+            self.engine.setProperty('rate', 150)
+            self.engine.setProperty('volume', 1.0)
+            self.engine.say(mensaje)
             self.engine.runAndWait()
         except Exception as e:
-            print(f"Error main_hablar: {e}")    
-            
-    def verificar_texto_voz(self):
-        from modulo_teclas import teclas
-        teclas = teclas()
-        self.text = self.text.lower()
-        if self.text == "captura pantalla" or self.text == "capturar pantalla" or self.text == "captura de pantalla" or self.text == "saca captura" or self.text == "sacar captura":
-            teclas.capturar_pantalla()
-        if self.text == "out saca clip":
-            self.voz.reproducir_audio("outplayed sacando clip")
-            teclas.sacar_clip_outplayed()
-        else:
-            print("No se reconoció el comando.")
+            print(f"Error en hablar: {e}")
 
-            
+    def verificar_texto_voz(self,texto):
+        try:
+            teclas_instance = teclas()
+            self.text = texto
+            if self.text.lower() in ["captura pantalla", "capturar pantalla", "captura de pantalla", "saca captura", "sacar captura"]:
+                teclas_instance.capturar_pantalla()
+            elif self.text.lower() == "out saca clip":
+                #self.voz.reproducir_audio("outplayed sacando clip")
+                teclas_instance.sacar_clip_outplayed()
+            elif self.text.lower() == "xbox":
+                #self.voz.reproducir_audio("xbox sacando clip")
+                teclas_instance.sacar_clip_xbox()
+            else:
+                print("No se reconoció el comando.")
+        except Exception as e:
+            print(f"Error en verificar_texto_voz: {e}")
 
-        
