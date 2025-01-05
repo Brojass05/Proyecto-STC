@@ -1,4 +1,4 @@
-pyaudio==0.2.11
-SpeechRecognition==3.8.1
-pyautogui==0.9.54
-wheel==0.38.4
+SpeechRecognition>=3.8.1
+pyttsx3>=2.90
+pyautogui>=0.9.54
+pyinstaller>=4.7  # Optional - only if creating executables
