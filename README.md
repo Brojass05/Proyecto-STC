@@ -7,6 +7,7 @@ A Python application that converts speech to text and provides clipboard functio
 - Python 3.8 or higher
 - pip (Python package installer)
 - Windows 10 or higher
+- Xbox Game Bar
 
 ## Installation
 
