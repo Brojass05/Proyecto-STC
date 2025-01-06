@@ -27,7 +27,6 @@ class EscuchaPorDebajo:
             indice = texto1.find(" ")
             texto_jarvis = texto1[:indice]
             comando_jarvis = texto1[indice:].strip()
-            print(texto1 ,"\n", texto_jarvis, "\n", comando_jarvis)
             
             if texto_jarvis in ["jarvis","yarbis","yarbiss","yarvis","yarviss","yarbis","yarbiss","yarviss"]:
                 # Create new instance without background listening
@@ -52,8 +51,6 @@ class EscuchaPorDebajo:
     
     def iniciar_escucha(self):
         print("\nIniciando escucha en segundo plano...")
-        with self.m as source:
-            self.r.adjust_for_ambient_noise(source, duration=1)
         self.stop_listening = self.r.listen_in_background(self.m, self.callback)
 
     def detener_escucha(self):

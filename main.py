@@ -30,7 +30,7 @@ class Main:
         try:
             teclas_instance = teclas()
             self.text = texto
-            if self.text.lower() in ["captura pantalla", "capturar pantalla", "captura de pantalla", "saca captura", "sacar captura"]:
+            if self.text.lower() in ["captura pantalla", "capturar pantalla", "captura de pantalla", "saca captura", "sacar captura","captura la pantalla"]:
                 teclas_instance.capturar_pantalla()
             elif self.text.lower() == "out saca clip":
                 #self.voz.reproducir_audio("outplayed sacando clip")
