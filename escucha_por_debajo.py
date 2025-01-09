@@ -1,14 +1,11 @@
 import speech_recognition as sr
-import pyttsx3
 import logging
 from main import Main
+from capturar_pantalla import VideoEncoding
 
 class EscuchaPorDebajo:
     def __init__(self):
         self.recognized_text = None
-        self.engine = pyttsx3.init()
-        self.engine.setProperty('rate', 150)
-        self.engine.setProperty('volume', 1.0)
         self.r = sr.Recognizer()
         self.m = sr.Microphone()
 
@@ -17,6 +14,14 @@ class EscuchaPorDebajo:
             print("Ajustando ruido ambiental... por favor, espera.")
             self.r.adjust_for_ambient_noise(source, duration=2)
             print(f"Umbral ajustado a: {self.r.energy_threshold}")
+        
+
+    def grabar_pantalla(self):
+        from threading import Thread
+        self.video = VideoEncoding()
+        self.hilo_video = Thread(target=self.video.capturar_pantalla)
+        self.hilo_video.start()
+        
 
     def callback(self, recognizer, audio):
         try:
@@ -33,7 +38,8 @@ class EscuchaPorDebajo:
                 if hasattr(self, 'stop_listening'):
                     self.stop_listening(wait_for_stop=False)
                     delattr(self, 'stop_listening')
-                
+                self.video.cerrar_captura()
+                self.hilo_video.join()
                 # Execute main flow
                 main = Main()
                 main.verificar_texto_voz(comando_jarvis)
@@ -52,6 +58,7 @@ class EscuchaPorDebajo:
     def iniciar_escucha(self):
         print("\nIniciando escucha en segundo plano...")
         self.stop_listening = self.r.listen_in_background(self.m, self.callback)
+        self.grabar_pantalla()
 
     def detener_escucha(self):
         if self.stop_listening:

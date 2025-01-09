@@ -1,5 +1,5 @@
 import speech_recognition as sr
-import pyttsx3
+
 
 class ModuloVoz:
     def __init__(self):

@@ -1,5 +1,4 @@
 from pyautogui import hotkey
-import pyttsx3
 # ejemplo
 # pyautogui.hotkey('win', 'shift', 's', interval=0.5)
 class teclas:
