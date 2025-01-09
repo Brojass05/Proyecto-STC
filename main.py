@@ -8,7 +8,7 @@ class Main:
         from escucha_por_debajo import EscuchaPorDebajo
         
         self.voz = ModuloVoz()  # Inicializar ModuloVoz correctamente
-        escucha = EscuchaPorDebajo()
+        
         
         
 
@@ -25,6 +25,7 @@ class Main:
         try:
             teclas_instance = teclas()
             self.text = texto
+            
             if self.text.lower() in ["captura pantalla", "capturar pantalla", "captura de pantalla", "saca captura", "sacar captura","captura la pantalla"]:
                 teclas_instance.capturar_pantalla()
             elif self.text.lower() == "out saca clip":

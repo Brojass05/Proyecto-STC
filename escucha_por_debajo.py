@@ -32,8 +32,14 @@ class EscuchaPorDebajo:
             indice = texto1.find(" ")
             texto_jarvis = texto1[:indice]
             comando_jarvis = texto1[indice:].strip()
+            clip = comando_jarvis.find("clip")
+            xbox = comando_jarvis.find("xbox")   
+            jarvis = ["jarvis","yarbis","yarbiss","yarvis","yarviss","yarbis","yarbiss","yarviss"]   
             
-            if texto_jarvis in ["jarvis","yarbis","yarbiss","yarvis","yarviss","yarbis","yarbiss","yarviss"]:
+            
+            if texto_jarvis in jarvis:
+                
+                    
                 # Create new instance without background listening
                 if hasattr(self, 'stop_listening'):
                     self.stop_listening(wait_for_stop=False)
@@ -42,7 +48,17 @@ class EscuchaPorDebajo:
                 self.hilo_video.join()
                 # Execute main flow
                 main = Main()
-                main.verificar_texto_voz(comando_jarvis)
+                if clip >= 0:
+                    for jar in jarvis:
+                        comando = "clip"
+                        
+                elif xbox >= 0:
+                    for jar in jarvis:
+                        comando = "xbox"
+                else:
+                    comando = ""
+
+                main.verificar_texto_voz(comando)
                 
                 # Start new background listening with fresh context
                 self.m = sr.Microphone()
@@ -65,6 +81,7 @@ class EscuchaPorDebajo:
             self.stop_listening(wait_for_stop=False)
             print("Escucha en segundo plano detenida.")
             
+
 if __name__ == "__main__":
     try:
         escucha = EscuchaPorDebajo()
@@ -73,4 +90,3 @@ if __name__ == "__main__":
         escucha.detener_escucha()
     except Exception as e:
         print(f"Error en el módulo principal: {e}")
-            
