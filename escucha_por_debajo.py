@@ -81,6 +81,9 @@ class EscuchaPorDebajo:
             self.stop_listening(wait_for_stop=False)
             print("Escucha en segundo plano detenida.")
             
+    def prueba(self):
+        pass
+            
 
 if __name__ == "__main__":
     try:
