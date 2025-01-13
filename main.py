@@ -1,11 +1,9 @@
-import logging
 from modulo_voz import ModuloVoz
 from modulo_teclas import teclas
 from capturar_pantalla import VideoEncoding
 
 class Main:
     def __init__(self):
-        from escucha_por_debajo import EscuchaPorDebajo
         
         self.voz = ModuloVoz()  # Inicializar ModuloVoz correctamente
         

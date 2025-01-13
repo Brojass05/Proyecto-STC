@@ -4,5 +4,6 @@ env/
 dist/
 build/
 __pycache__/
+
 .vscode/
 videos/
