@@ -1,30 +1,18 @@
-from time import sleep
 import cv2
 import configparser
 from PIL import ImageGrab
 import numpy as np
 import screeninfo as sc
 import os
-
+from conexion_ini import connIni
 
 # video enconding
 class VideoEncoding:
     def __init__(self):
         self.crear_carpeta()
         self.runing = True
-        self.config = configparser.ConfigParser()
-        self.config_file = "config.ini"
-        self.leer_ini()
-        
-    def leer_ini(self):
-        # Leer archivo INI o crear un archivo de configuración predeterminado si no existe
-        try:
-            self.config.read(self.config_file)
-            if "status" not in self.config:
-                self.config["status"] = {"verGrabacion": "0"}  # Valor por defecto
-                self.guardar_ini()
-        except Exception as e:
-            print(f"Error leyendo el archivo INI: {e}")
+        self.conn = connIni()
+        self.config = self.conn.leer_ini()  
         
     def capturar_pantalla(self):
         monitor_principal = None
@@ -54,6 +42,7 @@ class VideoEncoding:
                     break
             captura.release()
             cv2.destroyAllWindows()
+
     
     def  cerrar_captura(self):
         self.runing = False
@@ -66,10 +55,10 @@ class VideoEncoding:
             print(f"La carpeta '{ruta_carpeta}' ya existe.")
         except PermissionError:
             print("No tienes permisos para crear la carpeta.")
+
+
             
-            
-vid=VideoEncoding()
-vid.capturar_pantalla()
+
 
 
 

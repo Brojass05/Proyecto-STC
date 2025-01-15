@@ -7,9 +7,6 @@ class Main:
         
         self.voz = ModuloVoz()  # Inicializar ModuloVoz correctamente
         
-        
-        
-
     def flujo_principal(self):
         try:
             self.text = self.voz.obtener_voz()
