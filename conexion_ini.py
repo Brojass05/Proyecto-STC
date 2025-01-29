@@ -12,14 +12,14 @@ class connIni:
             self.config.read(self.config_file)
             if "status" not in self.config:
                 self.config["status"] = {
-                    "verGrabacion": "1",
-                    "grabarPantalla": "0",
+                    "grabarpantalla": "1",
+                    "vergrabacion": "1",
                     "fps":"15",
                     "langindex": "0",
                     "languageRec": "es-ES",
                     "clipLength": "10",
                     "indexformat": "0",
-                    "guardarGrabcion": "0"
+                    "guardarGrabacion": "0"
                     }  # Valores por defecto
                 self.guardar_ini()
             return self.config

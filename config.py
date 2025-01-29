@@ -97,6 +97,7 @@ class Gui:
         self.config["status"]["grabarPantalla"] = str(grabarPantalla)
         self.config["status"]["guardarGrabacion"] = str(guardarGrabacion)
         self.conn.guardar_ini()
+        messagebox.showinfo("Configuración guardada","Se guardó la configuración")
     
     def get_start_status(self):
         # Establecer el estado inicial del Checkbutton desde el archivo INI

@@ -27,14 +27,15 @@ class RecorteVideo:
             video_recortado.write_videofile("output.mov", codec="libx264")  # Exportar a MOV
         elif otptIndex == 3:
             video_recortado.write_videofile("output.webm", codec="libvpx")  # Exportar a WebM
-        
-        self.borrar_video_original(ruta_video)
+        guardarGrabracion = self.config['status'].getint("guardargrabacion")
+        if guardarGrabracion:
+            self.borrar_video_original(ruta_video)
         
         
     def borrar_video_original(self,ruta_video):
         
         if os.path.exists(ruta_video):
             os.system(f'attrib +h "{ruta_video}"')
-            print(f"Archivo '{ruta_video}' eliminado con éxito.")
+
         else:
             print(f"El archivo '{ruta_video}' no existe.")        
